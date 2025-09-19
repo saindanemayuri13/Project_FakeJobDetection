@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake Job Detection</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #eef2f3; text-align: center; }
+        .box { margin: 80px auto; width: 500px; padding: 30px; background: white; border-radius: 12px; box-shadow: 0px 6px 14px rgba(0,0,0,0.2); }
+        textarea { width: 100%; height: 120px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+        button { margin-top: 15px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #45a049; }
+        .fake { color: red; font-size: 20px; font-weight: bold; }
+        .real { color: green; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Fake Job Detection</h2>
+        <form method="POST">
+            <textarea name="job_text" placeholder="Paste job description here...">{{ job_text }}</textarea><br>
+            <button type="submit">Check Job</button>
+        </form>
+
+        {% if prediction %}
+            <h3>Job Description:</h3>
+            <p>{{ job_text }}</p>
+
+            <h3>Prediction:</h3>
+            <p class="{% if 'Fake' in prediction %}fake{% else %}real{% endif %}">
+                {{ prediction }}
+            </p>
+        {% endif %}
+    </div>
+</body>
+</html>
